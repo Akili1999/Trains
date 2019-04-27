@@ -35,3 +35,12 @@ firebase.database().ref().orderByChild("dateAdded").limitToLast(1).on("child_add
   $("#time-display").html(snapshot.val().time);
   $("#frequency-display").html(snapshot.val().frequency);
 })
+
+firebase.database().ref().on("child_added", function(snapshot){
+  
+  $(".fire-table").append("<th>"+snapshot.val().name+"</th>");
+  $(".fire-table").append("<td>"+snapshot.val().destination+"</td>");
+  $(".fire-table").append("<td>"+snapshot.val().frequency+"</td>");
+  $(".fire-table").append("<td>"+snapshot.val().time+"</td>");
+  
+})

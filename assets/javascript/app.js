@@ -14,8 +14,15 @@ var name = "";
 var destination = "";
 var time = 0;
 var frequency = 0;
+var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
+var currentTime = moment();
+var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+var tRemainder = diffTime % tFrequency;
+var tMinutesTillTrain = tFrequency - tRemainder;
+var nextTrain = moment().add(tMinutesTillTrain, "minutes");
 
 $("#add-train").on("click", function(){
+  if("#name-input".val(),"#destination-input".val(),"#time-input".val(),"#frequency-input".val() !=""){
   name = $("#name-input").val().trim();
   destination = $("#destination-input").val().trim();
   time = $("#time-input").val().trim();
@@ -27,8 +34,8 @@ $("#add-train").on("click", function(){
     frequency:frequency,
     dataAdded:firebase.database.ServerValue.TIMESTAMP
   })
+  }
 })
-
 firebase.database().ref().orderByChild("dateAdded").limitToLast(1).on("child_added", function(snapshot){
   $("#name-display").html(snapshot.val().name);
   $("#destination-display").html(snapshot.val().destination);
@@ -38,9 +45,9 @@ firebase.database().ref().orderByChild("dateAdded").limitToLast(1).on("child_add
 
 firebase.database().ref().on("child_added", function(snapshot){
   
-  $(".fire-table").append("<th>"+snapshot.val().name+"</th>");
+  $(".fire-table").append("<td>"+snapshot.val().name+"</td>");
   $(".fire-table").append("<td>"+snapshot.val().destination+"</td>");
   $(".fire-table").append("<td>"+snapshot.val().frequency+"</td>");
-  $(".fire-table").append("<td>"+snapshot.val().time+"</td>");
-  
+  $(".fire-table").append("<td>"+snapshot.val().time+"</td>")
+
 })

@@ -1,0 +1,19 @@
+body{
+    background-image: url("../images/antique-backdrop-background-129731.jpg");
+    font-family: 'Oswald', sans-serif;
+}
+.container{
+    margin-top: 5%;
+}
+.jumbotron{
+    background-color: bisque;
+    border-style: ridge;
+    border-color: black;
+    border-width: 5px;
+}
+.card-body{
+    background-color: bisque;
+    border-style: ridge;
+    border-color: black;
+    border-width: 5px;
+}

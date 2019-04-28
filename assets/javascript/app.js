@@ -40,6 +40,10 @@ $("#add-train").on("click", function(){
     })
   }
   }
+  $("#name-input").val("");
+  $("#destination-input").val("");
+  $("#time-input").val("");
+  $("#frequency-input").val("");
 })
 // This is where we retrict the user from using letters in the time input //
 function validate (time) {
@@ -58,6 +62,8 @@ function validate (time) {
   return isGood;
 }
 
+// This takes a snapshot anytime we add a child to our firebase, which allows us to track exactly what is currently on the firebase //
+// We also are adding our moment values to each of the values we want to keep track of //
 firebase.database().ref().on("child_added", function(snapshot){
   var time = "";
   var frequency = 0;
